@@ -1,6 +1,6 @@
 const {CommandContext} = require('./CommandContext');
 
-class CommandExecute{
+class CommandExecutor{
     constructor(bot){
         this.bot = bot;
     }
@@ -18,4 +18,9 @@ class CommandExecute{
             return await cmd.run(bot, ctx, args);
         }
     }
+}
+
+
+module.exports = {
+    CommandExecutor: CommandExecutor
 }
