@@ -1,7 +1,7 @@
 
 class CommandContext{
-    constructor(Bot, message){
-        this.bot = Bot;
+    constructor(bot, message){
+        this.bot = bot;
         this.message = message;
         this.guild = message.guild;
         this.channel = message.channel;
