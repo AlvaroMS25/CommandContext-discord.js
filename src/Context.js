@@ -21,3 +21,5 @@ class CommandContext{
         await this.author.send(args);
     }
 }
+
+export const CommandContext = CommandContext;
