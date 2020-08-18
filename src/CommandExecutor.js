@@ -11,11 +11,11 @@ class CommandExecutor{
         if(!message.content.startsWith(prefix)) return;
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let command = args.shift().toLowerCase();
-        let ctx = new CommandContext(bot, message)
+        let ctx = new CommandContext(this.bot, message)
     
-        let cmd = bot.commands.get(command) || bot.commands.find((c) => c.aliases.includes(command))
+        let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
         if(cmd){
-            return await cmd.run(bot, ctx, args);
+            return await cmd.run(this.bot, ctx, args);
         }
     }
 }
