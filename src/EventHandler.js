@@ -10,7 +10,7 @@ class EventHandler{
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
         files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
-            let file_path = path.join(this.dir, file)
+            let file_path = path.join(dir, file)
             let eventFile = require(file_path);
 
             this.bot.on(eventName, eventFile.bind(null, this.bot));
