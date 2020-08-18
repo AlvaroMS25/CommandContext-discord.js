@@ -6,7 +6,7 @@ class CommandContext{
         this.guild = message.guild;
         this.channel = message.channel;
         this.author = message.author;
-        
+        this.IsBot = message.author.bot || null;
     }
 
     async send(args){
