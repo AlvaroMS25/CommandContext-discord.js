@@ -22,4 +22,6 @@ class CommandContext{
     }
 }
 
-export const CommandContext = CommandContext;
+module.exports = {
+    CommandContext: CommandContext
+}
