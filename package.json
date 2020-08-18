@@ -1,5 +1,5 @@
 {
-  "name": "CommandContext",
+  "name": "discord.js-ctx",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
