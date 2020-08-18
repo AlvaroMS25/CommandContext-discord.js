@@ -6,5 +6,6 @@ const {EventHandler} = require('./src/EventHandler');
 module.exports = {
     CommandContext: CommandContext,
     CommandHandler: CommandHandler,
-    EventHandler: EventHandler
+    EventHandler: EventHandler,
+    CommandExecutor: CommandExecutor
 }
