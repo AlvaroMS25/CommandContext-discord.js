@@ -12,9 +12,9 @@ class CommandHandler{
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
         files.forEach(file => {
             let file_path = path.join(dir, file);
-            console.log(file_path);
             let command = require(file_path);
             this.bot.commands.set(command.name, command);
+            console.log(`Command ${command.name} loaded`)
         });
     }
 }
