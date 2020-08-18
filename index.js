@@ -1,5 +1,6 @@
 const {CommandContext} = require('./src/CommandContext');
 const {CommandHandler} = require('./src/CommandHandler');
+const {CommandExecutor} = require('./src/CommandExecutor');
 const {EventHandler} = require('./src/EventHandler');
 
 module.exports = {
