@@ -1,8 +1,12 @@
 {
   "name": "discord.js-ctx",
-  "version": "2.0.5",
-  "description": "",
+  "version": "2.1.0",
+  "description": "Some utility tools for discord.js or eris libraries",
   "main": "index.js",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Alvaro11143/CommandContext-discord.js.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
