@@ -1,5 +1,5 @@
 {
-  "name": "discord.js-ctx",
+  "name": "discord.js-utils",
   "version": "1.0.4",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7"
+  }
 }
