@@ -9,10 +9,10 @@ class EventHandler{
 
     async Start(){
         let files = fs.readdirSync(this.dir).filter((f) => f.endsWith('.js'));
-        this.files.forEach(file => {
+        files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
-            dir = path.join(this.dir, file)
-            let eventFile = require(dir);
+            let file_path = path.join(this.dir, file)
+            let eventFile = require(file_path);
 
             this.bot.on(eventName, eventFile.bind(null, this.bot));
             console.log(`Loaded event ${eventName}`);
