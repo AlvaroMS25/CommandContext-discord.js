@@ -6,6 +6,7 @@ class CommandHandler{
     constructor(bot){
         this.bot = bot;
     }
+    
     async LoadCommands(dir){
         this.bot.commands = new Collection();
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
