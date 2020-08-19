@@ -1,7 +1,6 @@
 const fs = require('fs');
 const {Collection} = require('discord.js');
 const path = require('path');
-const {CommandContext} = require('./CommandContext')
 
 class CommandHandler{
     constructor(bot){
