@@ -1,6 +1,6 @@
 {
   "name": "discord.js-ctx",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Some utility tools for discord.js or eris libraries",
   "main": "index.js",
   "repository": {
