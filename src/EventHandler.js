@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 class EventHandler{
-    constructor(bot, dir){
+    constructor(bot){
         this.bot = bot;
     }
 
