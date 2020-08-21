@@ -7,6 +7,11 @@ class EventHandler{
     }
 
     async Start(dir){
+        /**
+         * Loads and binds client events with file events based on its names
+         * 
+         * @param directory to search event files
+         */
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
         files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
