@@ -1,11 +1,11 @@
 {
   "name": "discord.js-ctx",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Some utility tools for discord.js or eris libraries",
   "main": "index.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Alvaro11143/CommandContext-discord.js.git"
+    "type": "git",
+    "url": "https://github.com/Alvaro11143/CommandContext-discord.js.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +16,8 @@
   "dependencies": {
     "discord.js": "^12.3.1",
     "fs": "0.0.1-security",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "path": "^0.12.7"
   }
 }
