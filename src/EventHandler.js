@@ -6,7 +6,7 @@ class EventHandler{
         this.bot = bot;
     }
 
-    async Start(dir){
+    async LoadEvents(dir){
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
         files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
