@@ -1,8 +1,8 @@
 const {CommandContext} = require('./CommandContext');
 
 class CommandExecutor{
-    constructor(bot, allowDM){
-        if(!typeof(allowDM) === 'boolean') throw 'allowDM parameter must be a boolean';
+    constructor(bot, allowDM = false){
+        if(!(typeof(allowDM) === 'boolean')) throw 'allowDM parameter must be a boolean';
         this.bot = bot;
         this.allowDM = allowDM;
     }
