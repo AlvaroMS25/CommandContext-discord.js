@@ -8,10 +8,10 @@ class CommandExecutor{
     }
 
     async Execute(message, prefix){
-        if(message.author.bot) return ;
-        if (this.allowDM == false){
+        if (this.allowDM === false){
             if(message.channel.type === 'dm') return ;
         }
+        if(message.author.bot) return;
         if(!message.content.startsWith(prefix)) return;
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let command = args.shift().toLowerCase();
