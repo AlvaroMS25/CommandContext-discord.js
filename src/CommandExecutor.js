@@ -1,13 +1,17 @@
 const {CommandContext} = require('./CommandContext');
 
 class CommandExecutor{
-    constructor(bot){
+    constructor(bot, allowDM){
+        if(!typeof(allowDM) === 'boolean') throw 'allowDM parameter must be a boolean';
         this.bot = bot;
+        this.allowDM = allowDM;
     }
 
     async Execute(message, prefix){
         if(message.author.bot) return ;
-        if(message.channel.type === 'dm') return ;
+        if (this.allowDM == false){
+            if(message.channel.type === 'dm') return ;
+        }
         if(!message.content.startsWith(prefix)) return;
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let command = args.shift().toLowerCase();
