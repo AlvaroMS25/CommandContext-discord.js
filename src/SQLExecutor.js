@@ -28,6 +28,15 @@ class SQLExecutor{
             throw "Error during SQL operations";
         }
     }
+
+    GetOptions(){
+        return {
+            host: this.host,
+            user: this.user,
+            password: this.password,
+            database: this.database || null
+        };
+    }
 }
 
 module.exports = {
