@@ -17,7 +17,8 @@ class CommandExecutor{
         let command = args.shift().toLowerCase();
         let final_args = "";
         args.forEach(arg => {
-            final_args += ` ${arg}`;
+            final_args += `${arg}`;
+            final_args += ' ';
         });
         let ctx = new CommandContext(this.bot, message)
     
