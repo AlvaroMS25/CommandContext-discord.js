@@ -20,6 +20,7 @@ class CommandExecutor{
             final_args += `${arg}`;
             final_args += ' ';
         });
+        final_args = final_args.trim();
         let ctx = new CommandContext(this.bot, message)
     
         let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
