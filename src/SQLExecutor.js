@@ -19,12 +19,23 @@ class SQLExecutor{
 
     async Execute(command){
         try {
-        var conn = await this.GetConn();
-        const [r, u] = await conn.query(command);
-        conn.end();
-        return r[0];
+            let conn = await this.GetConn();
+            const [r, u] = await conn.query(command);
+            conn.end();
+            return r[0];
 
         } catch(err) {
+            throw "Error during SQL operations";
+        }
+    }
+
+    async RawExecute(command){
+        try {
+            let conn = await this.GetConn();
+            const [r, u] = await conn.query(command);
+            conn.end();
+            return [r, u];
+        } catch (e) {
             throw "Error during SQL operations";
         }
     }
