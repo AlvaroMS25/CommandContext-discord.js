@@ -10,15 +10,15 @@ class CommandContext{
     }
 
     async send(args){
-        return await this.channel.send(args);
+        return this.channel.send(args);
     }
     
     async reply(args){
-        return await this.channel.send(`${this.author.mention}, ${args}`);
+        return this.channel.send(`${this.author.mention}, ${args}`);
     }
 
     async direct(args){
-        return await this.author.send(args);
+        return this.author.send(args);
     }
 }
 
