@@ -1,32 +1,31 @@
 const {CommandContext} = require('./CommandContext');
 
 class CommandExecutor{
-    constructor(bot, allowDM = false){
-        if(!(typeof(allowDM) === 'boolean')) throw 'allowDM parameter must be a boolean';
+    allowDM = true;
+
+    constructor(bot, ignoreBots = false){
         this.bot = bot;
-        this.allowDM = allowDM;
+        this.ignoreBots = ignoreBots
     }
 
-    async Execute(message, prefix){
+    async execute(message, prefix = ""){
         if (this.allowDM === false){
             if(message.channel.type === 'dm') return ;
         }
-        if(message.author.bot) return;
+        if(this.ignoreBots === true && message.author.bot) return;
         if(!message.content.startsWith(prefix)) return;
         let args = message.content.slice(prefix.length).trim().split(/ +/g);
         let command = args.shift().toLowerCase();
-        let final_args = "";
-        args.forEach(arg => {
-            final_args += `${arg}`;
-            final_args += ' ';
-        });
-        final_args = final_args.trim();
         let ctx = new CommandContext(this.bot, message)
     
         let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
         if(cmd){
-            return await cmd.run(this.bot, ctx, final_args);
+            return await cmd.run(this.bot, ctx, args);
         }
+    }
+
+    async executeWithMultiplePrefixes(message, prefixes = [""]) {
+
     }
 }
 
