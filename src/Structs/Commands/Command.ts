@@ -4,10 +4,10 @@ import {CommandContext} from '../../CommandContext'
 
 
 export class Command implements Runnable {
-    name: string
+    name: string;
     aliases: string[];
-    OwnerOnly: boolean = false;
-    GuildOnly: boolean = false;
+    OwnerOnly: boolean;
+    GuildOnly: boolean;
     PermissionLevel?: Permissions[] = null
 
     run(client, ctx: typeof CommandContext, args: string[]): Promise<void> {
