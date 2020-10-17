@@ -6,7 +6,7 @@ export class CommandContext{
     guild: discord.Guild;
     channel: discord.TextChannel | discord.DMChannel | discord.NewsChannel;
     author: discord.User;
-    IsBot?: boolean;
+    IsBot: boolean;
 
     constructor(bot: discord.Client, message: discord.Message){
         this.bot = bot;
@@ -14,7 +14,7 @@ export class CommandContext{
         this.guild = message.guild;
         this.channel = message.channel;
         this.author = message.author;
-        this.IsBot = message.author.bot || null;
+        this.IsBot = message.author.bot;
     }
 
     async send(args: any){
