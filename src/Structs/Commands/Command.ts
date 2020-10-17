@@ -1,6 +1,8 @@
 import {Runnable} from '../Shared/Runnable';
 import {Permissions} from './Permissions';
 import {CommandContext} from '../../CommandContext'
+import {CommandOptions} from './Options';
+import discord = require('discord.js');
 
 
 export class Command implements Runnable {
@@ -8,9 +10,17 @@ export class Command implements Runnable {
     aliases: string[];
     OwnerOnly: boolean;
     GuildOnly: boolean;
-    PermissionLevel?: Permissions[] = null
+    RequiredPermissions?: Permissions[] = null
 
-    run(client, ctx: typeof CommandContext, args: string[]): Promise<void> {
+    constructor(CommandOptions: CommandOptions) {
+        this.name = CommandOptions.name;
+        this.aliases = CommandOptions.aliases || null;
+        this.OwnerOnly = CommandOptions.OwnerOnly;
+        this.GuildOnly = CommandOptions.GuildOnly;
+        this.RequiredPermissions = CommandOptions.RequiredPermissions || null;
+    }
+
+    run(client: discord.Client, ctx: CommandContext, args: string[]): void {
         throw 'Run method not overrided on command class';
     }
 

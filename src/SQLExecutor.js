@@ -17,10 +17,10 @@ class SQLExecutor{
         });
     }
 
-    async Execute(command){
+    async Execute(query){
         try {
             let conn = await this.GetConn();
-            const [r, u] = await conn.query(command);
+            const [r, u] = await conn.query(query);
             conn.end();
             return r[0];
 
@@ -29,10 +29,10 @@ class SQLExecutor{
         }
     }
 
-    async RawExecute(command){
+    async RawExecute(query){
         try {
             let conn = await this.GetConn();
-            const [r, u] = await conn.query(command);
+            const [r, u] = await conn.query(query);
             conn.end();
             return [r, u];
         } catch (e) {

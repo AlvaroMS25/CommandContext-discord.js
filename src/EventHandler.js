@@ -17,6 +17,8 @@ class EventHandler{
             console.log(`Loaded event ${eventName}`);
         });
     }
+
+    async addEvent(){}
 }
 
 module.exports = {
