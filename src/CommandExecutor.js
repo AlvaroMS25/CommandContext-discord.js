@@ -1,7 +1,7 @@
 const {CommandContext} = require('./CommandContext');
 const {Collection} = require('discord.js');
 
-class CommandExecutor{
+export class CommandExecutor{
     allowDM = true;
 
     constructor(client, ignoreBots = false){
@@ -39,7 +39,7 @@ class CommandExecutor{
 
                 let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
                 if(cmd){
-                    return await cmd.run(this.bot, ctx, args);
+                    return await cmd.shouldRun(this.bot, ctx, args);
                 }
             }
         }
@@ -48,9 +48,8 @@ class CommandExecutor{
     registerCommand(command) {
         this.bot.commands.set(command.name, command);
     }
-}
 
-
-module.exports = {
-    CommandExecutor: CommandExecutor
+    unregisterCommand(name) {
+        return this.bot.commands.delete(name);
+    }
 }

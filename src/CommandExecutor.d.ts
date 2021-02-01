@@ -1,9 +1,9 @@
-import discord = require('discord.js');
-import {Command} from './Structs/Commands/Command';
+import discord = require("discord.js");
 
-export class CommandExecutor {
-    constructor(client: discord.Client);
-    execute(message: discord.Message, prefix: string): void;
-    executeWithMultiplePrefixes(message: discord.Message, prefixes: string[]): void;
-    registerCommand(command: Command)
+export declare class CommandExecutor {
+    constructor(client: discord.Client, ignore_bots: boolean);
+    execute(message: discord.Message, prefix: string): Promise<void>;
+    executeWithMultiplePrefixes(message: discord.Message, prefixes: string[]): Promise<void>;
+    registerCommand(command: NodeRequire): void;
+    unregisterCommand(name: string): boolean
 }

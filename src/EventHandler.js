@@ -1,12 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 
-class EventHandler{
+export class EventHandler{
     constructor(bot){
         this.bot = bot;
     }
 
-    async LoadEvents(dir){
+    registerEventsFromDir(dir){
         let files = fs.readdirSync(dir).filter((f) => f.endsWith('.js'));
         files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
@@ -18,9 +18,9 @@ class EventHandler{
         });
     }
 
-    async addEvent(){}
-}
+    registerEvent(event){
+        let event_name = event.name;
 
-module.exports = {
-    EventHandler: EventHandler
+        this.bot.on(event_name, event.bind(null, this.bot));
+    }
 }
