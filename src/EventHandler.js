@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-export class EventHandler{
+class EventHandler{
     constructor(bot){
         this.bot = bot;
     }

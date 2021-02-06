@@ -1,6 +1,6 @@
 {
   "name": "discord.js-ctx",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "Some utility tools for discord.js or eris libraries",
   "main": "dist/index",
   "repository": {
@@ -15,7 +15,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.5.1",
     "fs": "0.0.1-security",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",

@@ -4,7 +4,7 @@ const {Collection} = require('discord.js');
 const fs = require("fs");
 const path = require("path");
 
-export class CommandExecutor{
+class CommandExecutor{
     allowDM = true;
     provider = null;
     prefixes = [];

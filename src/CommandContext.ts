@@ -1,5 +1,5 @@
 import discord = require('discord.js');
-import {Message} from 'discord.js';
+import {MessageOptions, APIMessageContentResolvable, MessageAdditions, Message} from 'discord.js';
 
 export class CommandContext {
     bot: discord.Client;
@@ -20,15 +20,15 @@ export class CommandContext {
         this.member = message.member;
     }
 
-    send(args: discord.StringResolvable, options?: discord.MessageOptions | (discord.MessageOptions & { split?: false }) | discord.MessageAdditions): Promise<Message> {
+    send(args: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message> {
         return this.channel.send(args);
     }
 
-    reply(args: discord.StringResolvable, options?: discord.MessageOptions | (discord.MessageOptions & { split?: false }) | discord.MessageAdditions): Promise<Message>{
-        return this.channel.send(`<@${this.author.id}>, ${args}`, options);
+    reply(args: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>{
+        return this.message.reply(args);
     }
 
-    direct(args: discord.StringResolvable, options?: discord.MessageOptions | (discord.MessageOptions & { split?: false }) | discord.MessageAdditions): Promise<Message>{
+    direct(args: APIMessageContentResolvable | (MessageOptions & { split?: false }) | MessageAdditions): Promise<Message>{
         return this.author.send(args);
     }
 }
