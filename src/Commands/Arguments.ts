@@ -3,12 +3,16 @@ import { resolve } from "path";
 
 export class Arguments {
     constructor(private _args: string[]) {}
-    get args() {
+    raw(): string[] {
         return this._args;
     }
 
-    set args(new_args: string[]) {
-        this._args = new_args;
+    get args(): string[] {
+        return this._args;
+    }
+
+    set args(args: string[]) {
+        this._args = args;
     }
 
     remaining(): string[] {
