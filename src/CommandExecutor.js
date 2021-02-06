@@ -57,7 +57,7 @@ class CommandExecutor{
             if(message.content.startsWith(prefix)) {
                 let split_args = message.content.slice(prefix.length).trim().split(/ +/g);
                 let args = new Arguments(split_args);
-                let command = args.shift().toLowerCase();
+                let command = split_args.shift().toLowerCase();
                 let ctx = new CommandContext(this.bot, message)
 
                 let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
