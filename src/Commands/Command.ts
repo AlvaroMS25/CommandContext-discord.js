@@ -11,7 +11,7 @@ export class Command {
     ownerOnly: boolean;
     guildOnly: boolean;
     requiredPermissions: Permissions[];
-    desciption?: string;
+    description?: string;
 
     constructor(options: CommandOptions) {
         this.name = options.name;
@@ -19,6 +19,7 @@ export class Command {
         this.ownerOnly = options?.ownerOnly || false;
         this.guildOnly = options?.guildOnly || false;
         this.requiredPermissions = options?.requiredPermissions || [];
+        this.description = options.description;
     }
 
     async run(client: discord.Client, ctx: CommandContext, args: Arguments) {
