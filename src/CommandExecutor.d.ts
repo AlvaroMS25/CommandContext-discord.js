@@ -3,7 +3,7 @@ import {PrefixProvider} from "./Commands/PrefixProvider";
 import {Command} from './Commands/Command';
 
 export declare class CommandExecutor {
-    constructor(client: discord.Client, ignore_bots: boolean);
+    constructor(client: discord.Client, ownerIds: string[], ignoreBots: boolean);
     registerCommand(command: Command): void;
     unregisterCommand(name: string): boolean;
     registerCommandsFromDir(dir: string): void;

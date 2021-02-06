@@ -1,5 +1,6 @@
 const {CommandContext} = require('./CommandContext');
 const {PrefixProvider} = require("./Commands/PrefixProvider");
+const {Arguments} = require("./Commands/Arguments");
 const {Collection} = require('discord.js');
 const fs = require("fs");
 const path = require("path");
@@ -8,10 +9,12 @@ class CommandExecutor{
     allowDM = true;
     provider = null;
     prefixes = [];
+    ownerIds = [];
 
-    constructor(client, ignoreBots = false){
+    constructor(client, ownerIds = [], ignoreBots = false){
         this.bot = client;
         this.bot.commands = new Collection();
+        this.ownerIds = ownerIds;
         this.ignoreBots = ignoreBots;
 
         this.registerMessageEvent(client);
@@ -44,36 +47,22 @@ class CommandExecutor{
         }
     }
 
-    async execute(message, prefix){
-        if (this.allowDM === false){
-            if(message.channel.type === 'dm') return ;
-        }
-        if(this.ignoreBots === true && message.author.bot) return;
-        if(!message.content.startsWith(prefix)) return;
-        let args = message.content.slice(prefix.length).trim().split(/ +/g);
-        let command = args.shift().toLowerCase();
-        let ctx = new CommandContext(this.bot, message)
-    
-        let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
-        if(cmd){
-            return await cmd.run(this.bot, ctx, args);
-        }
-    }
 
-    async executeWithMultiplePrefixes(message, prefixes) {
+    async execute(message, prefixes) {
         if (this.allowDM === false){
             if(message.channel.type === 'dm') return ;
         }
         if(this.ignoreBots === true && message.author.bot) return;
         for (const prefix of prefixes) {
             if(message.content.startsWith(prefix)) {
-                let args = message.content.slice(prefix.length).trim().split(/ +/g);
+                let split_args = message.content.slice(prefix.length).trim().split(/ +/g);
+                let args = new Arguments(split_args);
                 let command = args.shift().toLowerCase();
                 let ctx = new CommandContext(this.bot, message)
 
                 let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
                 if(cmd){
-                    return await cmd.shouldRun(this.bot, ctx, args);
+                    return await cmd.shouldRun(this.bot, this.ownerIds, ctx, args);
                 }
             }
         }
@@ -106,12 +95,12 @@ class CommandExecutor{
         if(this.provider != null) {
             let prefix = this.provider.provide(message);
 
-            await this.execute(message, prefix);
+            await this.execute(message, [prefix]);
         } else {
             if(this.prefixes.length === 0) {
                 throw "No prefixes specified at CommandExecutor";
             } else {
-                await this.executeWithMultiplePrefixes(message, this.prefixes);
+                await this.execute(message, this.prefixes);
             }
         }
     }
