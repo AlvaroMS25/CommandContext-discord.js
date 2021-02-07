@@ -1,6 +1,3 @@
-import { rejects } from "assert";
-import { resolve } from "path";
-
 export class Arguments {
     constructor(private _args: string[]) {}
     raw(): string[] {

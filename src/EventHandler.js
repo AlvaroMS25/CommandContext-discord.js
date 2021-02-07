@@ -19,16 +19,18 @@ class EventHandler{
     }
 
     registerEvent(dir) {
-        let file = fs.readFileSync(dir).filter(f => (f.endsWith(".js") || f.endsWith(".ts")));
+        if(!dir.endsWith('.js')) throw "Invalid event file provided";
+        let requireFile = require(dir);
 
-        if(file == null || file == undefined) {
+        if(requireFile == null || requireFile == undefined) {
             throw "Invalid file provided to `registerEvent`";
         } else {
-            let event_name = file.substring(0, file.indexOf(".js"));
-            let requireFile = require("dir");
+            let filename = dir.replace(/^.*[\\\/]/, '')
 
-            this.bot.on(eventName, eventFile.bind(null, this.bot));
-            console.log(`Loaded event ${eventName}`);
+            let event_name = filename.substring(0, filename.indexOf(".js"));
+
+            this.bot.on(event_name, requireFile.bind(null, this.bot));
+            console.log(`Loaded individual event: ${event_name}`);
         }
     }
 }
