@@ -27,7 +27,11 @@ export class Arguments {
         return joined;
     }
 
-    next() {
-        return this.advance(1);
+    next(): string {
+        return this.advance(1).toString();
+    }
+
+    clone(): Arguments {
+        return new Arguments(this._args.slice());
     }
 }

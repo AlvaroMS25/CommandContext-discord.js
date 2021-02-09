@@ -12,6 +12,7 @@ export class Command {
     guildOnly: boolean;
     requiredPermissions: Permissions[];
     description?: string;
+    private subCommands: discord.Collection<string, Command> = new discord.Collection();
 
     constructor(options: CommandOptions) {
         this.name = options.name;
@@ -20,6 +21,12 @@ export class Command {
         this.guildOnly = options?.guildOnly || false;
         this.requiredPermissions = options?.requiredPermissions || [];
         this.description = options.description;
+
+        if(options.subCommands !== undefined) {
+            for(const command of options.subCommands) {
+                this.registerSubCommand(command);
+            }
+        }
     }
 
     async run(client: discord.Client, ctx: CommandContext, args: Arguments) {
@@ -27,6 +34,13 @@ export class Command {
     }
 
     async shouldRun(client: discord.Client, ownerIds: string[], ctx: CommandContext, args: Arguments) {
+        let clone = args.clone();
+        let next = clone.next();
+        if(this.isSubCommand(next)) {
+            this.executeSubCommand(next, client, ownerIds, ctx, clone);
+            return;
+        }
+
         if(ctx.guild !== null) {
             if(ctx.member === null) return;
 
@@ -42,7 +56,29 @@ export class Command {
             if(!ownerIds.includes(ctx.author.id)) return;
         }
 
-        await this.run(client, ctx, args).catch(e => console.warn(`Command ${this.name} had an uncaught exception: ${e}`));
+        this.run(client, ctx, args).catch(e => console.warn(`Command ${this.name} had an uncaught exception: ${e}`));
     }
 
+    isSubCommand(nameOrAlias: string): boolean {
+        let cmd = this.subCommands.get(nameOrAlias) || this.subCommands.find((c) => c.aliases.includes(nameOrAlias));
+        if(cmd) return true;
+        else return false;
+    }
+
+    async executeSubCommand(nameOrAlias: string, client: discord.Client, ownerIds: string[], ctx: CommandContext, args: Arguments): Promise<void> {
+        let cmd = this.subCommands.get(nameOrAlias) || this.subCommands.find((c) => c.aliases.includes(nameOrAlias));
+
+        cmd!!.shouldRun(client, ownerIds, ctx, args)
+    }
+
+    registerSubCommand(command: Command) {
+        this.subCommands.set(command.name, command);
+        console.log(`Registered subcommand ${command.name} for ${this.name}`);
+    }
+
+    registerSubCommands(commands: Command[]) {
+        for(const command of commands) {
+            this.registerSubCommand(command);
+        }
+    }
 }

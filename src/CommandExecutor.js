@@ -2,6 +2,7 @@ const {CommandContext} = require('./CommandContext');
 const {PrefixProvider} = require("./Commands/PrefixProvider");
 const {Arguments} = require("./Commands/Arguments");
 const {Collection} = require('discord.js');
+const {Command} = require("./Commands/Command");
 const fs = require("fs");
 const path = require("path");
 
@@ -84,6 +85,7 @@ class CommandExecutor{
     }
 
     registerCommand(command) {
+        if(!(command instanceof Command)) throw "Command must be an instance of framework's `Command` class";
         this.bot.commands.set(command.name, command);
     }
 
