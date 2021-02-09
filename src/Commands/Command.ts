@@ -34,13 +34,6 @@ export class Command {
     }
 
     async shouldRun(client: discord.Client, ownerIds: string[], ctx: CommandContext, args: Arguments) {
-        let clone = args.clone();
-        let next = clone.next();
-        if(this.isSubCommand(next)) {
-            this.executeSubCommand(next, client, ownerIds, ctx, clone);
-            return;
-        }
-
         if(ctx.guild !== null) {
             if(ctx.member === null) return;
 
@@ -54,6 +47,13 @@ export class Command {
 
         if(this.ownerOnly) {
             if(!ownerIds.includes(ctx.author.id)) return;
+        }
+
+        let clone = args.clone();
+        let next = clone.next();
+        if(this.isSubCommand(next)) {
+            this.executeSubCommand(next, client, ownerIds, ctx, clone);
+            return;
         }
 
         this.run(client, ctx, args).catch(e => console.warn(`Command ${this.name} had an uncaught exception: ${e}`));
