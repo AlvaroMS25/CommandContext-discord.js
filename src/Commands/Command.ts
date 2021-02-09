@@ -73,7 +73,6 @@ export class Command {
 
     registerSubCommand(command: Command) {
         this.subCommands.set(command.name, command);
-        console.log(`Registered subcommand ${command.name} for ${this.name}`);
     }
 
     registerSubCommands(commands: Command[]) {

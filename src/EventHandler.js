@@ -14,7 +14,6 @@ class EventHandler{
             let eventFile = require(file_path);
 
             this.bot.on(eventName, eventFile.bind(null, this.bot));
-            console.log(`Loaded event ${eventName}`);
         });
     }
 
@@ -30,7 +29,6 @@ class EventHandler{
             let event_name = filename.substring(0, filename.indexOf(".js"));
 
             this.bot.on(event_name, requireFile.bind(null, this.bot));
-            console.log(`Loaded individual event: ${event_name}`);
         }
     }
 }
