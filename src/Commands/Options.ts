@@ -9,4 +9,5 @@ export interface CommandOptions {
     requiredPermissions?: Permissions[];
     description?: string;
     subCommands?: Command[];
+    allowedChannels?: string[];
 }

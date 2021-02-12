@@ -12,6 +12,7 @@ export class Command {
     guildOnly: boolean;
     requiredPermissions: Permissions[];
     description?: string;
+    allowedChannels?: string[];
     private subCommands: discord.Collection<string, Command> = new discord.Collection();
 
     constructor(options: CommandOptions) {
@@ -21,6 +22,7 @@ export class Command {
         this.guildOnly = options?.guildOnly || false;
         this.requiredPermissions = options?.requiredPermissions || [];
         this.description = options.description;
+        this.allowedChannels = options.allowedChannels;
 
         if(options.subCommands !== undefined) {
             for(const command of options.subCommands) {
@@ -47,6 +49,10 @@ export class Command {
 
         if(this.ownerOnly) {
             if(!ownerIds.includes(ctx.author.id)) return;
+        }
+
+        if(this.allowedChannels !== null) {
+            if(!this.allowedChannels?.includes(ctx.channel.id)) return;
         }
 
         let clone = args.clone();
