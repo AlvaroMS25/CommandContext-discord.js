@@ -51,7 +51,7 @@ export class Command {
             if(!ownerIds.includes(ctx.author.id)) return;
         }
 
-        if(this.allowedChannels !== null) {
+        if(this.allowedChannels !== undefined) {
             if(!this.allowedChannels?.includes(ctx.channel.id)) return;
         }
 
