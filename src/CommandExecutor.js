@@ -95,7 +95,7 @@ class CommandExecutor{
 
     async handleCommand(message) {
         if(this.provider != null) {
-            let prefix = this.provider.provide(message);
+            const prefix = await this.provider.provide(this.bot, message);
 
             await this.execute(message, [prefix]);
         } else {
