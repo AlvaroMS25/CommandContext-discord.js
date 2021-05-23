@@ -31,7 +31,7 @@ export class Command {
         }
     }
 
-    async run(client: discord.Client, ctx: CommandContext, args: Arguments) {
+    async run(client: discord.Client, ctx: CommandContext, args: Arguments): Promise<any> {
         throw 'Run method not overriden on command class';
     }
 
@@ -86,4 +86,8 @@ export class Command {
             this.registerSubCommand(command);
         }
     }
+}
+
+export interface Command {
+    run(client: discord.Client, ctx: CommandContext, args: Arguments): Promise<any>;
 }
