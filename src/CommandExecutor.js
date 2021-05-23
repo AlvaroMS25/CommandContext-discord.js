@@ -63,7 +63,7 @@ class CommandExecutor{
 
                 let cmd = this.bot.commands.get(command) || this.bot.commands.find((c) => c.aliases.includes(command))
                 if(cmd){
-                    return await cmd.shouldRun(this.bot, this.ownerIds, ctx, args);
+                    return cmd.shouldRun(this.bot, this.ownerIds, ctx, args);
                 }
             }
         }
@@ -97,23 +97,19 @@ class CommandExecutor{
         if(this.provider != null) {
             const prefix = await this.provider.provide(this.bot, message);
 
-            await this.execute(message, [prefix]);
+            this.execute(message, [prefix]);
         } else {
             if(this.prefixes.length === 0) {
                 throw "No prefixes specified at CommandExecutor";
             } else {
-                await this.execute(message, this.prefixes);
+                this.execute(message, this.prefixes);
             }
         }
     }
 
     registerMessageEvent(client) {
         client.on("message", async(message) => {
-            try {
-                await this.handleCommand(message);
-            } catch (e) {
-                throw e;
-            }
+            this.handleCommand(message).catch(e => console.warn);
         });
     }
 }
