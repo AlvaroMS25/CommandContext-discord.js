@@ -7,7 +7,7 @@ class EventHandler{
     }
 
     registerEventsFromDir(dir){
-        let files = fs.readdirSync(dir).filter((f) => (f.endsWith(".js") || f.endsWith(".ts")));
+        let files = fs.readdirSync(dir).filter((f) => f.endsWith(".js"));
         files.forEach(file => {
             let eventName = file.substring(0, file.indexOf(".js"));
             let file_path = path.join(dir, file)
@@ -18,11 +18,11 @@ class EventHandler{
     }
 
     registerEvent(dir) {
-        if(!dir.endsWith('.js')) throw "Invalid event file provided";
+        if(!dir.endsWith('.js')) throw "Invalid event file provided to `registerEvent`";
         let requireFile = require(dir);
 
         if(requireFile == null || requireFile == undefined) {
-            throw "Invalid file provided to `registerEvent`";
+            throw "Invalid event file provided to `registerEvent`";
         } else {
             let filename = dir.replace(/^.*[\\\/]/, '')
 

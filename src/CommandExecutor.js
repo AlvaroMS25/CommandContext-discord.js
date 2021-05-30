@@ -70,7 +70,7 @@ class CommandExecutor{
     }
 
     registerCommandsFromDir(dir) {
-        let files = fs.readdirSync(dir).filter((f) => (f.endsWith(".js") || f.endsWith(".ts")));
+        let files = fs.readdirSync(dir).filter((f) => f.endsWith(".js"));
         files.forEach(file => {
             let file_path = path.join(dir, file);
             let required = require(file_path);
